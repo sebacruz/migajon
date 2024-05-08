@@ -14,11 +14,13 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@nestjs/schematics": "^10.0.1",
     "@nx/devkit": "19.0.1",
     "@nx/eslint": "19.0.1",
     "@nx/eslint-plugin": "19.0.1",
     "@nx/jest": "19.0.1",
     "@nx/js": "19.0.1",
+    "@nx/nest": "19.0.1",
     "@nx/next": "19.0.1",
     "@nx/playwright": "19.0.1",
     "@nx/workspace": "19.0.1",

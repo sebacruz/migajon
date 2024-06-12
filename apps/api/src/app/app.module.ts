@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { Supply } from './supplies/supply.entity';
 import { Recipe } from './recipes/recipe.entity';
 import { RecipeIngredient } from './recipes/recipe-ingredient.entity';
+import { Client } from './clients/client.entity';
 
 @Module({
   imports: [
@@ -24,12 +25,12 @@ import { RecipeIngredient } from './recipes/recipe-ingredient.entity';
         username: configService.get('DATABASE_USERNAME'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [Supply, Recipe, RecipeIngredient],
+        entities: [Supply, Recipe, RecipeIngredient, Client],
         synchronize: true,
       })
     }),
     JsonApiModule.forRoot({
-      entities: [Supply, Recipe, RecipeIngredient],
+      entities: [Supply, Recipe, RecipeIngredient, Client],
       options: {
         requiredSelectField: false
       }

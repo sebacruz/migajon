@@ -12,14 +12,16 @@
     "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
+    "@nestjs/swagger": "^7.3.1",
     "@nestjs/typeorm": "^10.0.2",
     "axios": "^1.6.0",
+    "json-api-nestjs": "^7.0.3",
     "mysql2": "^3.10.0",
     "next": "14.2.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "rxjs": "^7.8.0",
-    "tslib": "^2.3.0",
+    "tslib": "~2.4.1",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {

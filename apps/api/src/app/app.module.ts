@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JsonApiModule } from 'json-api-nestjs';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { Supply } from './supplies/supply.entity';
 
 @Module({
   imports: [
@@ -20,9 +22,15 @@ import { AppService } from './app.service';
         username: configService.get('DATABASE_USERNAME'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [],
+        entities: [Supply],
         synchronize: true,
       })
+    }),
+    JsonApiModule.forRoot({
+      entities: [Supply],
+      options: {
+        requiredSelectField: false
+      }
     })
   ],
   controllers: [AppController],

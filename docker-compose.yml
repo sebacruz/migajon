@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:11.4
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_USER: user
+      MARIADB_PASSWORD: pass
+      MARIADB_DATABASE: apidb
+    ports:
+      - 3306:3306

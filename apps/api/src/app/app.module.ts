@@ -6,6 +6,8 @@ import { JsonApiModule } from 'json-api-nestjs';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Supply } from './supplies/supply.entity';
+import { Recipe } from './recipes/recipe.entity';
+import { RecipeIngredient } from './recipes/recipe-ingredient.entity';
 
 @Module({
   imports: [
@@ -22,12 +24,12 @@ import { Supply } from './supplies/supply.entity';
         username: configService.get('DATABASE_USERNAME'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [Supply],
+        entities: [Supply, Recipe, RecipeIngredient],
         synchronize: true,
       })
     }),
     JsonApiModule.forRoot({
-      entities: [Supply],
+      entities: [Supply, Recipe, RecipeIngredient],
       options: {
         requiredSelectField: false
       }

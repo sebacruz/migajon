@@ -9,6 +9,8 @@ import { Supply } from './supplies/supply.entity';
 import { Recipe } from './recipes/recipe.entity';
 import { RecipeIngredient } from './recipes/recipe-ingredient.entity';
 import { Client } from './clients/client.entity';
+import { Order } from './orders/order.entity';
+import { OrderItem } from './orders/order-item.entity';
 
 @Module({
   imports: [
@@ -25,12 +27,12 @@ import { Client } from './clients/client.entity';
         username: configService.get('DATABASE_USERNAME'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [Supply, Recipe, RecipeIngredient, Client],
+        entities: [Supply, Recipe, RecipeIngredient, Client, Order, OrderItem],
         synchronize: true,
       })
     }),
     JsonApiModule.forRoot({
-      entities: [Supply, Recipe, RecipeIngredient, Client],
+      entities: [Supply, Recipe, RecipeIngredient, Client, Order, OrderItem],
       options: {
         requiredSelectField: false
       }

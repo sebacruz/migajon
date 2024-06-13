@@ -34,7 +34,8 @@ import { OrderItem } from './orders/order-item.entity';
     JsonApiModule.forRoot({
       entities: [Supply, Recipe, RecipeIngredient, Client, Order, OrderItem],
       options: {
-        requiredSelectField: false
+        requiredSelectField: false,
+        debug: true
       }
     })
   ],

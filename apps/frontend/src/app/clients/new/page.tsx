@@ -1,7 +1,7 @@
 'use client';
 
 import { Alert, Button, Group, Stack, TextInput, Title } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { isEmail, isNotEmpty, matches, useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import { createResource } from '../../../utils/api';
 import { useState } from 'react';
@@ -11,11 +11,9 @@ export default function Page() {
   const form = useForm({
     mode: 'uncontrolled',
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      phone: (value) =>
-        /^(?:\+54\s?)?(\(?\d{2,4}\)?)?[\s.-]?\d{2,4}[\s.-]?\d{4,8}$/.test(value)
-          ? null
-          : 'Invalid phone number'
+      name: isNotEmpty('Name cannot be empty'),
+      email: isEmail('Invalid email'),
+      phone: matches(/^(?:\+54\s?)?(\(?\d{2,4}\)?)?[\s.-]?\d{2,4}[\s.-]?\d{4,8}$/, 'Invalid phone number')
     }
   });
 

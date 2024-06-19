@@ -14,8 +14,6 @@ export default async function Page() {
 
   return (
     <>
-      <Title>Clients</Title>
-
       <Table>
         <TableThead>
           <TableTr>

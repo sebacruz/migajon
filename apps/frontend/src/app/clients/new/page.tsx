@@ -38,8 +38,6 @@ export default function Page() {
 
   return (
     <>
-      <Title>Clients</Title>
-
       <Title order={2}>Add New Client</Title>
 
       {hasError && (

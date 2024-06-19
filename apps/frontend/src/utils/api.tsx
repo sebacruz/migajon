@@ -27,3 +27,8 @@ class User {}
 export const getResource = async (resource) => {
   return await jsonSdk.jonApiSdkService.getAll(resource)
 }
+
+
+export const createResource = async (resource) => {
+  return await jsonSdk.jonApiSdkService.postOne(resource)
+}

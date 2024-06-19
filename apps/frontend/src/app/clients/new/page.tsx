@@ -1,18 +1,41 @@
 'use client';
 
-import { Button, Group, Stack, TextInput, Title } from '@mantine/core';
+import { Alert, Button, Group, Stack, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useRouter } from 'next/navigation';
+import { createResource } from '../../../utils/api';
+import { useState } from 'react';
+import { IconInfoCircle } from '@tabler/icons-react';
 
 export default function Page() {
   const form = useForm({
     mode: 'uncontrolled',
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email')
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      phone: (value) =>
+        /^(?:\+54\s?)?(\(?\d{2,4}\)?)?[\s.-]?\d{2,4}[\s.-]?\d{4,8}$/.test(value)
+          ? null
+          : 'Invalid phone number'
     }
   });
 
-  const saveClient = async (values) => {
-    console.log(values);
+  const router = useRouter();
+  const [hasError, setHasError] = useState(false);
+
+  const saveClient = async ({ name, email, phone } = values) => {
+    const clientData = new (class Client {
+      name: string = name;
+      email: string = email;
+      phone: string = phone;
+    })();
+
+    try {
+      const client = await createResource(clientData);
+
+      return router.push(`/clients/${client.id}`);
+    } catch (error) {
+      return setHasError(true);
+    }
   };
 
   return (
@@ -20,6 +43,18 @@ export default function Page() {
       <Title>Clients</Title>
 
       <Title order={2}>Add New Client</Title>
+
+      {hasError && (
+        <Alert
+          variant="light"
+          color="red"
+          title="An error has occurred"
+          mb="xl"
+          icon={<IconInfoCircle />}
+        >
+          An error occurred while saving the new client. Please try again.
+        </Alert>
+      )}
 
       <form onSubmit={form.onSubmit(saveClient)}>
         <Stack mb="xl">

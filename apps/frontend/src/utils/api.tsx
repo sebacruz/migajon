@@ -24,10 +24,13 @@ const jsonSdk = JsonApiJs(
 
 class User {}
 
-export const getResource = async (resource) => {
+export const getAllResources = async (resource) => {
   return await jsonSdk.jonApiSdkService.getAll(resource)
 }
 
+export const getResource = async (resource, id: string | number) => {
+  return await jsonSdk.jonApiSdkService.getOne(resource, id)
+}
 
 export const createResource = async (resource) => {
   return await jsonSdk.jonApiSdkService.postOne(resource)

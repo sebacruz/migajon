@@ -7,10 +7,10 @@ import {
   TableTr,
   Title,
 } from '@mantine/core';
-import { getResource } from '../../utils/api';
+import { getAllResources } from '../../utils/api';
 
 export default async function Page() {
-  const clients = await getResource(class Client {});
+  const clients = await getAllResources(class Client {});
 
   return (
     <>

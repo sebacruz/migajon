@@ -1,6 +1,24 @@
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import {
+  ColorSchemeScript,
+  MantineProvider,
+  AppShell,
+  Group,
+  Burger,
+  AppShellHeader,
+  AppShellNavbar,
+  AppShellMain,
+  NavLink,
+} from '@mantine/core';
+import Link from 'next/link';
 
 import '@mantine/core/styles.css';
+import { LinksGroup } from './components/links-group/LinksGroup';
+import {
+  IconAddressBook,
+  IconComponents,
+  IconList,
+  IconReceipt,
+} from '@tabler/icons-react';
 
 // import './global.css';
 
@@ -21,7 +39,90 @@ export default function RootLayout({
       </head>
 
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+          <AppShell
+            header={{ height: 60 }}
+            navbar={{
+              width: 300,
+              breakpoint: 'sm',
+            }}
+            padding="md"
+          >
+            <AppShellHeader>
+              <Group h="100%" px="md">
+                <strong>Panaderia</strong>
+              </Group>
+            </AppShellHeader>
+
+            <AppShellNavbar p="md">
+              <NavLink
+                component={Link}
+                href="/clients"
+                label="Clients"
+                childrenOffset="28"
+                leftSection={<IconAddressBook size="1rem" stroke={1.25} />}
+              >
+                <NavLink component={Link} href="/clients" label="All Clients" />
+                <NavLink
+                  component={Link}
+                  href="/clients/new"
+                  label="New Client"
+                />
+              </NavLink>
+
+              <NavLink
+                component={Link}
+                href="/supplies"
+                label="Stock"
+                childrenOffset="28"
+                leftSection={<IconComponents size="1rem" stroke={1.25} />}
+              >
+                <NavLink
+                  component={Link}
+                  href="/supplies"
+                  label="All Supplies"
+                />
+                <NavLink
+                  component={Link}
+                  href="/supplies/new"
+                  label="Add Supply"
+                />
+              </NavLink>
+
+              <NavLink
+                component={Link}
+                href="/recipes"
+                label="Recetas"
+                childrenOffset="28"
+                leftSection={<IconList size="1rem" stroke={1.25} />}
+              >
+                <NavLink component={Link} href="/recipes" label="All Recipes" />
+                <NavLink
+                  component={Link}
+                  href="/recipes/new"
+                  label="New Recipe"
+                />
+              </NavLink>
+
+              <NavLink
+                component={Link}
+                href="/orders"
+                label="Orders"
+                childrenOffset="28"
+                leftSection={<IconReceipt size="1rem" stroke={1.25} />}
+              >
+                <NavLink component={Link} href="/orders" label="All Orders" />
+                <NavLink
+                  component={Link}
+                  href="/orders/new"
+                  label="New Order"
+                />
+              </NavLink>
+            </AppShellNavbar>
+
+            <AppShellMain>{children}</AppShellMain>
+          </AppShell>
+        </MantineProvider>
       </body>
     </html>
   );

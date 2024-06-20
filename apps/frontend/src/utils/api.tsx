@@ -2,9 +2,9 @@ import {
   adapterForAxios,
   FilterOperand,
   JsonApiJs,
-  JsonSdkPromise,
+  JsonSdkPromise
 } from 'json-api-nestjs-sdk';
-import { EntityType, JsonConfig } from 'json-api-nestjs-sdk/mjs/src/lib/types';
+import { JsonConfig } from 'json-api-nestjs-sdk/mjs/src/lib/types';
 import axios from 'axios';
 
 const axiosAdapter = adapterForAxios(axios);
@@ -34,4 +34,8 @@ export const getResource = async (resource, id: string | number) => {
 
 export const createResource = async (resource) => {
   return await jsonSdk.jonApiSdkService.postOne(resource)
+}
+
+export const deleteResource = async (resource) => {
+  return await jsonSdk.jonApiSdkService.deleteOne(resource)
 }

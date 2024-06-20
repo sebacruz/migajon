@@ -22,18 +22,28 @@ export default function Page() {
   const [clients, setClients] = useState();
   const [loading, setLoading] = useState(true);
 
+  async function getClients() {
+    const clients = await getAllResources(class Client {});
+
+    setClients(clients);
+    setLoading(false);
+  }
+
   useEffect(() => {
-    async function getClients() {
-      const clients = await getAllResources(class Client {});
+    // async function getClients() {
+    //   const clients = await getAllResources(class Client {});
 
-      console.log(clients);
-
-      setClients(clients);
-      setLoading(false);
-    }
+    //   setClients(clients);
+    //   setLoading(false);
+    // }
 
     getClients();
   }, []);
+
+  const deleteClient = async client => {
+    await deleteResource(client)
+    await getClients()
+  }
 
   return (
     <>
@@ -51,31 +61,31 @@ export default function Page() {
         <TableTbody>
           {loading && (
             <>
-            <TableTr>
-              <TableTd colSpan={5}>
-                <Skeleton>Loading...</Skeleton>
-              </TableTd>
-            </TableTr>
-            <TableTr>
-              <TableTd colSpan={5}>
-                <Skeleton>Loading...</Skeleton>
-              </TableTd>
-            </TableTr>
-            <TableTr>
-              <TableTd colSpan={5}>
-                <Skeleton>Loading...</Skeleton>
-              </TableTd>
-            </TableTr>
-            <TableTr>
-              <TableTd colSpan={5}>
-                <Skeleton>Loading...</Skeleton>
-              </TableTd>
-            </TableTr>
-            <TableTr>
-              <TableTd colSpan={5}>
-                <Skeleton>Loading...</Skeleton>
-              </TableTd>
-            </TableTr>
+              <TableTr>
+                <TableTd colSpan={5}>
+                  <Skeleton>Loading...</Skeleton>
+                </TableTd>
+              </TableTr>
+              <TableTr>
+                <TableTd colSpan={5}>
+                  <Skeleton>Loading...</Skeleton>
+                </TableTd>
+              </TableTr>
+              <TableTr>
+                <TableTd colSpan={5}>
+                  <Skeleton>Loading...</Skeleton>
+                </TableTd>
+              </TableTr>
+              <TableTr>
+                <TableTd colSpan={5}>
+                  <Skeleton>Loading...</Skeleton>
+                </TableTd>
+              </TableTr>
+              <TableTr>
+                <TableTd colSpan={5}>
+                  <Skeleton>Loading...</Skeleton>
+                </TableTd>
+              </TableTr>
             </>
           )}
           {clients &&
@@ -95,6 +105,17 @@ export default function Page() {
                         href={`/clients/${client.id}`}
                       >
                         <IconEye
+                          style={{ width: rem(16), height: rem(16) }}
+                          stroke={1.5}
+                        />
+                      </ActionIcon>
+
+                      <ActionIcon
+                        variant="subtle"
+                        color="red"
+                        onClick={() => deleteClient(client)}
+                      >
+                        <IconTrash
                           style={{ width: rem(16), height: rem(16) }}
                           stroke={1.5}
                         />

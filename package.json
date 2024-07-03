@@ -8,6 +8,7 @@
     "@mantine/core": "^7.9.0",
     "@mantine/form": "^7.10.2",
     "@mantine/hooks": "^7.9.0",
+    "@mantine/modals": "^7.11.1",
     "@nestjs/common": "^10.0.2",
     "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.0.2",

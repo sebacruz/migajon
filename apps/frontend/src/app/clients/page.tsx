@@ -11,8 +11,10 @@ import {
   TableThead,
   TableTr,
   Title,
+  Text,
   rem
 } from '@mantine/core';
+import { modals } from '@mantine/modals';
 import { deleteResource, getAllResources } from '../../utils/api';
 import { IconEye, IconPencil, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
@@ -40,10 +42,47 @@ export default function Page() {
     getClients();
   }, []);
 
-  const deleteClient = async client => {
-    await deleteResource(client)
-    await getClients()
-  }
+  const confirmDeleteClient = () =>
+    modals.openConfirmModal({
+      title: 'Delete client',
+      centered: true,
+      children: (
+        <Text size="sm">
+          Are you sure you want to delete this client? This action is
+          destructive and you will have to contact support to restore your data.
+        </Text>
+      ),
+      labels: { confirm: 'Delete account', cancel: "No don't delete it" },
+      confirmProps: { color: 'red' },
+      onCancel: () => console.log('Cancel'),
+      onConfirm: () => console.log('Confirmed')
+    });
+
+  const deleteClient = async (client) => {
+    modals.openConfirmModal({
+      title: 'Delete client',
+      centered: true,
+      children: (
+        <>
+          <Text mb={'md'} size="sm">
+            Are you sure you want to delete this client?
+          </Text>
+
+          <Text fw="bold" size="sm">
+            This action is destructive and you will have to contact support to
+            restore your data.
+          </Text>
+        </>
+      ),
+      labels: { confirm: 'Delete client', cancel: 'Cancel' },
+      confirmProps: { color: 'red' },
+      // onCancel: () => console.log('Cancel'),
+      onConfirm: async () => {
+        await deleteResource(client);
+        await getClients();
+      }
+    });
+  };
 
   return (
     <>
@@ -114,6 +153,7 @@ export default function Page() {
                         variant="subtle"
                         color="red"
                         onClick={() => deleteClient(client)}
+                        // onClick={confirmDeleteClient}
                       >
                         <IconTrash
                           style={{ width: rem(16), height: rem(16) }}

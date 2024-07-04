@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Alert,
   Button,
   Group,
   NativeSelect,
@@ -9,6 +10,7 @@ import {
   Title
 } from '@mantine/core';
 import { isNotEmpty, useForm } from '@mantine/form';
+import { IconInfoCircle } from '@tabler/icons-react';
 import { createResource } from 'apps/frontend/src/utils/api';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -27,6 +29,8 @@ export default function Page() {
   const [hasError, setHasError] = useState(false);
 
   const saveItem = async ({ name, type, unit } = values) => {
+    setHasError(false);
+
     const itemData = new (class Supply {
       name: string = name;
       type: string = type;
@@ -45,6 +49,18 @@ export default function Page() {
   return (
     <>
       <Title order={2}>Add New Supply</Title>
+
+      {hasError && (
+        <Alert
+          variant="light"
+          color="red"
+          title="An error has occurred"
+          mb="xl"
+          icon={<IconInfoCircle />}
+        >
+          An error occurred while saving the new Supply. Please try again.
+        </Alert>
+      )}
 
       <form onSubmit={form.onSubmit(saveItem)}>
         <Stack mb="xl">

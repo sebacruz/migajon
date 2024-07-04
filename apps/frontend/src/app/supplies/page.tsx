@@ -118,7 +118,7 @@ export default function Page() {
                         variant="subtle"
                         color="gray"
                         component={Link}
-                        href={`/clients/${item.id}`}
+                        href={`/supplies/${item.id}`}
                       >
                         <IconEye
                           style={{ width: rem(16), height: rem(16) }}
